@@ -1,1 +1,1 @@
-# EcoGasto_Grupo1
+Aquí reflejará mi avance del proyecto
