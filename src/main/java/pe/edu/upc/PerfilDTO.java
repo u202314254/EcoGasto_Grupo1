@@ -1,31 +1,14 @@
-package pe.edu.upc.entities;
+package pe.edu.upc.dtos;
 
-import jakarta.persistence.*;
+import pe.edu.upc.entities.Usuario;
 
-@Entity
-@Table(name = "perfil")
-
-public class Perfil {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PerfilDTO {
     private int idPerfil;
-
-    @ManyToOne
-    @JoinColumn(name = "idUsuario", nullable = false)
     private Usuario usuario;
-
-    @Column(name = "nombre", length = 50, nullable = false)
     private String nombre;
-
-    @Column(name = "edad", nullable = false)
-    private int edad;
-
-    @Column(name = "genero", length = 50, nullable = false)
+    private String edad;
     private String genero;
-
-    @Column(name = "telefono", length = 50, nullable = false)
     private String telefono;
-    public Perfil(){}
 
     public int getIdPerfil() {
         return idPerfil;
@@ -51,11 +34,11 @@ public class Perfil {
         this.nombre = nombre;
     }
 
-    public int getEdad() {
+    public String getEdad() {
         return edad;
     }
 
-    public void setEdad(int edad) {
+    public void setEdad(String edad) {
         this.edad = edad;
     }
 
@@ -74,6 +57,4 @@ public class Perfil {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-
-    public Perfil(int idPerfil, Usuario usuario, String nombre, int edad, String genero, String telefono) {}
 }
