@@ -30,8 +30,8 @@ public class SeguridadServiceImplement implements ISeguridadService {
     }
 
     @Override
-    public void delete(int seguridad) {
-        sS.deleteById(seguridad);
+    public void delete(int id) {
+        sS.deleteById(id);
 
     }
 
@@ -47,8 +47,8 @@ public class SeguridadServiceImplement implements ISeguridadService {
     }
 
     @Override
-    public List<Seguridad> findAll() {
-        return List.of();
+    public List<String[]> listarAccesos() {
+        return sS.listarAccesos();
     }
 
 
