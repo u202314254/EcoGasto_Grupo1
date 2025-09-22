@@ -37,4 +37,9 @@ public class UsuarioServiceImplement implements IUsuarioService {
     public Usuario listId(Integer id) {
         return uS.findById(id).orElse(null);
     }
+
+    @Override
+    public List<String[]> listarUsuariosActivos() {
+        return uS.listarUsuariosActivos();
+    }
 }

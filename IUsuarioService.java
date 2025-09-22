@@ -11,4 +11,5 @@ public interface IUsuarioService {
     public void delete(int id);
     public void update(Usuario usuario);
     Usuario listId(Integer id);
+    public List<String[]> listarUsuariosActivos();
 }

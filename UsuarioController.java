@@ -1,14 +1,15 @@
 package pe.edu.upc.controllers;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.dtos.UsuarioDTO;
+import pe.edu.upc.dtos.UsuarioxPerfilDTO;
 import pe.edu.upc.entities.Usuario;
 import pe.edu.upc.serviceinterfaces.IUsuarioService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -69,5 +70,26 @@ public class UsuarioController {
 
         uS.update(u);
         return ResponseEntity.ok("Registro con ID " + u.getIdUsuario() + " modificado correctamente.");
+    }
+    @GetMapping("/actividad")
+    public ResponseEntity<?> verActividad(){
+        List<UsuarioxPerfilDTO> listaDTO = new ArrayList<>();
+        List<String[]> fila = uS.listarUsuariosActivos();
+        if (fila.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No hay usuarios activos.");
+        }
+        for(String[] g:fila){
+            UsuarioxPerfilDTO dto = new UsuarioxPerfilDTO();
+            dto.setIdUsuario(Integer.parseInt(g[0]));
+            dto.setCorreo(g[1]);
+            dto.setNombre(g[2]);
+            dto.setEdad(Integer.parseInt(g[3]));
+            dto.setDistrito(g[4]);
+            dto.setNum_personas(Integer.parseInt(g[5]));
+            dto.setTipo_hogar(g[6]);
+            listaDTO.add(dto);
+        }
+        return ResponseEntity.ok(listaDTO);
     }
 }
