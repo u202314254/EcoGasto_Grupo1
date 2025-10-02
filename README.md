@@ -1,1 +1,0 @@
-# EcoGasto_Grupo1
