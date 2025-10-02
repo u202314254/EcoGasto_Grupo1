@@ -19,4 +19,11 @@ public interface IMetaRepository extends JpaRepository<Meta, Integer> {
             "WHERE m.id_usuario = m.id_usuario\n" +
             "  AND m.estado = 'Incompleta';", nativeQuery = true)
     List<String[]> findMetasActivasByUsuario();
+
+    @Query(value = "SELECT u.correo AS usuario, COUNT(m.id_meta) AS total_metas " +
+            "FROM usuario u " +
+            "JOIN Meta m ON u.id_usuario = m.id_usuario " +
+            "GROUP BY u.correo",
+            nativeQuery = true)
+    List<String[]> obtenerMetasPorUsuario();
 }

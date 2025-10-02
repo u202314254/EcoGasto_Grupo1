@@ -1,8 +1,6 @@
 package pe.edu.upc.entities;
-
 import jakarta.persistence.*;
-
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 @Entity
 @Table(name = "Consumo")
 
@@ -15,21 +13,32 @@ public class Consumo {
     @JoinColumn(name = "idUsuario", nullable = false)
     private Usuario usuario;
 
-    @Column(name = "tipo", length = 50, nullable = false)
-    private String tipo;
+    @ManyToOne
+    @JoinColumn(name = "idRecurso", nullable = false)
+    private Recurso recurso;
 
     @Column(name = "cantidad", nullable = false)
-    private Double cantidad;
+    private double cantidad;
 
     @Column(name = "costo", nullable = false)
-    private Double costo;
+    private double costo;
 
     @Column(name = "fecha", nullable = false)
-    private LocalDateTime fecha;
+    private LocalDate fecha;
 
     @Column(name = "descripcion", length = 200, nullable = false)
     private String descripcion;
     public Consumo() {}
+
+    public Consumo(int idConsumo, Usuario usuario, Recurso recurso, double cantidad, double costo, LocalDate fecha, String descripcion) {
+        this.idConsumo = idConsumo;
+        this.usuario = usuario;
+        this.recurso = recurso;
+        this.cantidad = cantidad;
+        this.costo = costo;
+        this.fecha = fecha;
+        this.descripcion = descripcion;
+    }
 
     public int getIdConsumo() {
         return idConsumo;
@@ -47,35 +56,35 @@ public class Consumo {
         this.usuario = usuario;
     }
 
-    public String getTipo() {
-        return tipo;
+    public Recurso getRecurso() {
+        return recurso;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setRecurso(Recurso recurso) {
+        this.recurso = recurso;
     }
 
-    public Double getCantidad() {
+    public double getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(Double cantidad) {
+    public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
     }
 
-    public Double getCosto() {
+    public double getCosto() {
         return costo;
     }
 
-    public void setCosto(Double costo) {
+    public void setCosto(double costo) {
         this.costo = costo;
     }
 
-    public LocalDateTime getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDateTime fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
@@ -86,6 +95,4 @@ public class Consumo {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
-    public Consumo(int idConsumo, Usuario usuario, String tipo, Double cantidad, Double costo, LocalDateTime fecha, String descripcion) {}
 }

@@ -1,28 +1,39 @@
 package pe.edu.upc.entities;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
+import java.io.Serializable;
+import java.util.List;
+
 @Entity
 @Table(name = "Usuario")
 
-public class Usuario {
+public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idUsuario;
 
-    @Column(name = "nombre", length = 50, nullable = false)
-    private String nombre;
+    @ManyToOne
+    @JoinColumn(name = "idHogar", nullable = false)
+    private Hogar hogar;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    @JsonBackReference
+    private List<Rol> roles;
+
+    @Column(name = "username", length = 50, nullable = false)
+    private String username;
 
     @Column(name = "correo", length = 50, nullable = false)
     private String correo;
 
-    @Column(name = "password", length = 50, nullable = false)
+    @Column(name = "password", length = 150, nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    @Column(name = "estado", nullable = false)
     private Boolean estado;
-    public Usuario() {}
 
     public int getIdUsuario() {
         return idUsuario;
@@ -32,20 +43,28 @@ public class Usuario {
         this.idUsuario = idUsuario;
     }
 
-    public Boolean getEstado() {
-        return estado;
+    public Hogar getHogar() {
+        return hogar;
     }
 
-    public void setEstado(Boolean estado) {
-        this.estado = estado;
+    public void setHogar(Hogar hogar) {
+        this.hogar = hogar;
     }
 
-    public String getPassword() {
-        return password;
+    public List<Rol> getRoles() {
+        return roles;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getCorreo() {
@@ -56,13 +75,19 @@ public class Usuario {
         this.correo = correo;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getPassword() {
+        return password;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Usuario(int idUsuario, String nombre, String correo, String password, Boolean estado) {}
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
 }

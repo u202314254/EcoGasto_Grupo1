@@ -6,7 +6,6 @@ import pe.edu.upc.entities.Meta;
 import pe.edu.upc.repositories.IMetaRepository;
 import pe.edu.upc.serviceinterfaces.IMetaService;
 
-import java.time.LocalDate;
 import java.util.List;
 @Service
 public class MetaServiceImplement implements IMetaService{
@@ -35,7 +34,12 @@ public class MetaServiceImplement implements IMetaService{
     }
 
     @Override
-    public List<Meta> buscarFechafin(LocalDate fechafin) {
-        return mS.buscarFechafin(fechafin);
+    public List<String[]> findMetasActivasByUsuario() {
+        return mS.findMetasActivasByUsuario();
+    }
+
+    @Override
+    public List<String[]> obtenerMetasPorUsuario() {
+        return mS.obtenerMetasPorUsuario();
     }
 }

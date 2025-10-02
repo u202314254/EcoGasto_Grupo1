@@ -11,4 +11,5 @@ public interface IMetaService {
     public void delete(int id);
     public void update(Meta meta);
     List<String[]> findMetasActivasByUsuario();
+    List<String[]> obtenerMetasPorUsuario();
 }

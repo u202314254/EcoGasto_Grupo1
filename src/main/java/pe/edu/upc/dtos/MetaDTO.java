@@ -1,19 +1,16 @@
 package pe.edu.upc.dtos;
-
-import org.springframework.cglib.core.Local;
+import pe.edu.upc.entities.Recurso;
 import pe.edu.upc.entities.Usuario;
-
 import java.time.LocalDate;
 
 
 public class MetaDTO {
     private int idMeta;
     private Usuario usuario;
-    private String descripcion;
-    private double monto;
+    private Recurso recurso;
+    public String estado;
     public LocalDate fechainicio;
     public LocalDate fechafin;
-    public String estado;
     private double progreso;
 
     public int getIdMeta() {
@@ -32,20 +29,20 @@ public class MetaDTO {
         this.usuario = usuario;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public Recurso getRecurso() {
+        return recurso;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setRecurso(Recurso recurso) {
+        this.recurso = recurso;
     }
 
-    public double getMonto() {
-        return monto;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setMonto(double monto) {
-        this.monto = monto;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public LocalDate getFechainicio() {
@@ -62,14 +59,6 @@ public class MetaDTO {
 
     public void setFechafin(LocalDate fechafin) {
         this.fechafin = fechafin;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
     }
 
     public double getProgreso() {

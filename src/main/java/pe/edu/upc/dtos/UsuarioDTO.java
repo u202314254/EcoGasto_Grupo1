@@ -1,10 +1,11 @@
 package pe.edu.upc.dtos;
-
 import pe.edu.upc.entities.Hogar;
+import pe.edu.upc.entities.Rol;
 
 public class UsuarioDTO {
     private int idUsuario;
     private Hogar hogar;
+    private String username;
     private String correo;
     private String password;
     private boolean estado;
@@ -23,6 +24,14 @@ public class UsuarioDTO {
 
     public void setHogar(Hogar hogar) {
         this.hogar = hogar;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getCorreo() {

@@ -1,5 +1,4 @@
 package pe.edu.upc.entities;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -26,6 +25,15 @@ public class Perfil {
     @Column(name = "telefono", length = 50, nullable = false)
     private String telefono;
     public Perfil(){}
+
+    public Perfil(int idPerfil, Usuario usuario, String nombre, int edad, String genero, String telefono) {
+        this.idPerfil = idPerfil;
+        this.usuario = usuario;
+        this.nombre = nombre;
+        this.edad = edad;
+        this.genero = genero;
+        this.telefono = telefono;
+    }
 
     public int getIdPerfil() {
         return idPerfil;
@@ -74,6 +82,4 @@ public class Perfil {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-
-    public Perfil(int idPerfil, Usuario usuario, String nombre, int edad, String genero, String telefono) {}
 }

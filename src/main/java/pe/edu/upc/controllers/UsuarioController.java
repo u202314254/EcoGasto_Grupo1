@@ -5,9 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.dtos.UsuarioDTO;
-import pe.edu.upc.dtos.UsuarioDTOList;
-import pe.edu.upc.dtos.UsuarioxPerfilDTO;
+import pe.edu.upc.dtos.*;
 import pe.edu.upc.entities.Usuario;
 import pe.edu.upc.serviceinterfaces.IUsuarioService;
 
@@ -37,6 +35,20 @@ public class UsuarioController {
         Usuario u = m.map(dto, Usuario.class);
         uS.insert(u);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getUsuario(@PathVariable Integer id) {
+        Usuario u = uS.listId(id);
+        if (u == null) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("No existe un registro con el ID: " + id);
+        }
+        ModelMapper m = new ModelMapper();
+        UsuarioDTOList dto = m.map(u, UsuarioDTOList.class);
+        return ResponseEntity.ok(dto);
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {

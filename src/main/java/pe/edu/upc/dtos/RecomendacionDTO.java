@@ -1,22 +1,14 @@
 package pe.edu.upc.dtos;
-
+import pe.edu.upc.entities.Meta;
 import java.time.LocalDate;
 
-public class RecomendacionSimpleDTO {
+public class RecomendacionDTO {
     private int idRecomendacion;
+    private Meta meta;
     private String descripcion;
     private String categoria;
     private LocalDate fechapublicacion;
     private String fuente;
-
-    public RecomendacionSimpleDTO(int idRecomendacion, String descripcion, String categoria, LocalDate fechapublicacion, String fuente) {
-        this.idRecomendacion = idRecomendacion;
-        this.descripcion = descripcion;
-        this.categoria = categoria;
-        this.fechapublicacion = fechapublicacion;
-        this.fuente = fuente;
-
-    }
 
     public int getIdRecomendacion() {
         return idRecomendacion;
@@ -24,6 +16,14 @@ public class RecomendacionSimpleDTO {
 
     public void setIdRecomendacion(int idRecomendacion) {
         this.idRecomendacion = idRecomendacion;
+    }
+
+    public Meta getMeta() {
+        return meta;
+    }
+
+    public void setMeta(Meta meta) {
+        this.meta = meta;
     }
 
     public String getDescripcion() {
@@ -57,5 +57,4 @@ public class RecomendacionSimpleDTO {
     public void setFuente(String fuente) {
         this.fuente = fuente;
     }
-
-   }
+}

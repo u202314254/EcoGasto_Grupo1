@@ -1,9 +1,6 @@
 package pe.edu.upc.entities;
-
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Meta")
@@ -17,24 +14,36 @@ public class Meta {
     @JoinColumn(name = "idUsuario", nullable = false)
     private Usuario usuario;
 
-    @Column(name = "descripcion", length = 200, nullable = false)
-    private String descripcion;
-
-    @Column(name = "recurso", length = 50, nullable = false)
-    private String recurso;
-
-    @Column(name = "fechainicio", nullable = false)
-    private LocalDateTime fechainicio;
-
-    @Column(name = "fechafin", nullable = false)
-    private LocalDateTime fechafin;
+    @ManyToOne
+    @JoinColumn(name = "idRecurso", nullable = false)
+    private Recurso recurso;
 
     @Column(name = "estado", length = 50, nullable = false)
     private String estado;
 
-    @Column(name = "progreso", length = 50, nullable = false)
+    @Column(name = "monto", nullable = false)
+    private double monto;
+
+    @Column(name = "fechainicio", nullable = false)
+    private LocalDate fechainicio;
+
+    @Column(name = "fechafin", nullable = false)
+    private LocalDate fechafin;
+
+    @Column(name = "progreso", nullable = false)
     private double progreso;
     public Meta(){}
+
+    public Meta(int idMeta, Usuario usuario, Recurso recurso, String estado, double monto, LocalDate fechainicio, LocalDate fechafin, double progreso) {
+        this.idMeta = idMeta;
+        this.usuario = usuario;
+        this.recurso = recurso;
+        this.estado = estado;
+        this.monto = monto;
+        this.fechainicio = fechainicio;
+        this.fechafin = fechafin;
+        this.progreso = progreso;
+    }
 
     public int getIdMeta() {
         return idMeta;
@@ -52,36 +61,12 @@ public class Meta {
         this.usuario = usuario;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public String getRecurso() {
+    public Recurso getRecurso() {
         return recurso;
     }
 
-    public void setRecurso(String recurso) {
+    public void setRecurso(Recurso recurso) {
         this.recurso = recurso;
-    }
-
-    public LocalDateTime getFechainicio() {
-        return fechainicio;
-    }
-
-    public void setFechainicio(LocalDateTime fechainicio) {
-        this.fechainicio = fechainicio;
-    }
-
-    public LocalDateTime getFechafin() {
-        return fechafin;
-    }
-
-    public void setFechafin(LocalDateTime fechafin) {
-        this.fechafin = fechafin;
     }
 
     public String getEstado() {
@@ -92,6 +77,30 @@ public class Meta {
         this.estado = estado;
     }
 
+    public double getMonto() {
+        return monto;
+    }
+
+    public void setMonto(double monto) {
+        this.monto = monto;
+    }
+
+    public LocalDate getFechainicio() {
+        return fechainicio;
+    }
+
+    public void setFechainicio(LocalDate fechainicio) {
+        this.fechainicio = fechainicio;
+    }
+
+    public LocalDate getFechafin() {
+        return fechafin;
+    }
+
+    public void setFechafin(LocalDate fechafin) {
+        this.fechafin = fechafin;
+    }
+
     public double getProgreso() {
         return progreso;
     }
@@ -99,6 +108,4 @@ public class Meta {
     public void setProgreso(double progreso) {
         this.progreso = progreso;
     }
-
-    public Meta(int idMeta, Usuario usuario, String descripcion, String recurso, LocalDateTime fechainicio, LocalDateTime fechafin, String estado, double progreso) {}
 }

@@ -2,13 +2,12 @@ package pe.edu.upc.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.dtos.CantidadMetaActivaDTO;
 import pe.edu.upc.dtos.MetaDTO;
-import pe.edu.upc.dtos.MetaxFechaEspecificaDTO;
-import pe.edu.upc.dtos.NotificacionNoLeidaDTO;
+import pe.edu.upc.dtos.MetasxUsuarioDTO;
 import pe.edu.upc.entities.Meta;
 import pe.edu.upc.serviceinterfaces.IMetaService;
 
@@ -69,20 +68,43 @@ public class MetaController {
         mS.update(met);
         return ResponseEntity.ok("Registro con ID " + met.getIdMeta() + " modificado");
     }
-    @GetMapping("/metasxfechas")
-    public ResponseEntity<?> MetaxFechaEspecifica(@RequestParam @DateTimeFormat(iso= DateTimeFormat.ISO.DATE) LocalDate f){
-        List<Meta> fila = mS.buscarFechafin(f);
+
+    @GetMapping("/incompleta")
+    public ResponseEntity<?> obtenerCantidadMetasCompletadas(){
+        List<CantidadMetaActivaDTO> listaDTO = new ArrayList<>();
+        List<String[]> fila = mS.findMetasActivasByUsuario();
+        if(fila.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron metas activas para este usuario..");
+        }
+        for(String[] m:fila){
+            CantidadMetaActivaDTO dto = new CantidadMetaActivaDTO();
+            dto.setIdMeta(Integer.parseInt(m[0]));
+            dto.setDescripcion(String.valueOf(m[1]));
+            dto.setFechaInicio(LocalDate.parse(m[2]));
+            dto.setFechaFin(LocalDate.parse(m[3]));
+            dto.setEstado(String.valueOf(m[4]));
+            listaDTO.add(dto);
+        }
+        return ResponseEntity.ok(listaDTO);
+    }
+
+    @GetMapping("/reporte-metas")
+    public ResponseEntity<?> obtenerMetasPorUsuario() {
+        List<MetasxUsuarioDTO> listaDTO = new ArrayList<>();
+        List<String[]> fila = mS.obtenerMetasPorUsuario();
 
         if (fila.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se encontraron metas con fecha fin: "+f);
+                    .body("No hay metas disponibles.");
         }
 
-        List<MetaxFechaEspecificaDTO> listaDTO = fila.stream().map(x -> {
-            ModelMapper m = new ModelMapper();
-            return m.map(x, MetaxFechaEspecificaDTO.class);
-        }).collect(Collectors.toList());
-
+        for (String[] g : fila) {
+            MetasxUsuarioDTO dto = new MetasxUsuarioDTO();
+            dto.setUsuario(String.valueOf(g[0]));
+            dto.setTotal(Integer.parseInt(g[1]));
+            listaDTO.add(dto);
+        }
         return ResponseEntity.ok(listaDTO);
     }
 }

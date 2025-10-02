@@ -1,21 +1,24 @@
 package pe.edu.upc.entities;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-@Entity
-@Table(name = "Rol")
 
-public class Rol {
+import java.io.Serializable;
+
+@Entity
+@Table(name = "Rol", uniqueConstraints = {@UniqueConstraint(columnNames = {"id_Usuario", "tipo"})})
+public class Rol implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idRol;
 
-    @ManyToOne
-    @JoinColumn(name = "idUsuario", nullable = false)
-    private Usuario usuario;
-
     @Column(name = "tipo", length = 50, nullable = false)
     private String tipo;
-    public Rol(){}
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference
+    private Usuario usuario;
+
 
     public int getIdRol() {
         return idRol;
@@ -40,6 +43,4 @@ public class Rol {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
-    public Rol(int idRol, Usuario usuario, String tipo) {}
 }
