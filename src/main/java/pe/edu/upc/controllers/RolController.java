@@ -1,14 +1,11 @@
 package pe.edu.upc.controllers;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.dtos.RolDTO;
-import pe.edu.upc.dtos.UsuarioDTO;
 import pe.edu.upc.entities.Rol;
-import pe.edu.upc.entities.Usuario;
 import pe.edu.upc.serviceinterfaces.IRolService;
 
 import java.util.List;
