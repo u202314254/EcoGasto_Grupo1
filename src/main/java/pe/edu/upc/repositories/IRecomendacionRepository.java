@@ -2,7 +2,10 @@ package pe.edu.upc.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import pe.edu.upc.dtos.RecomendacionDTOList;
 import pe.edu.upc.entities.Recomendacion;
 
 import java.util.List;
@@ -21,4 +24,11 @@ public interface IRecomendacionRepository extends JpaRepository<Recomendacion, I
             "WHERE rec.nombre_recurso = rec.nombre_recurso;",
             nativeQuery = true)
     List<String[]> findRecomendacionesPorRecurso();
+
+    @Query("SELECT new pe.edu.upc.dtos.RecomendacionDTOList(" +
+            "r.idRecomendacion, r.descripcion, r.categoria, r.fechapublicacion, r.fuente) " +
+            "FROM Recomendacion r " +
+            "WHERE r.categoria = :categoria")
+    List<RecomendacionDTOList> buscarPorCategoria(@Param("categoria") String categoria);
+
 }

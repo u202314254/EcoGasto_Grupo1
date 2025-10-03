@@ -10,6 +10,6 @@ public interface INotificacionService {
     public Notificacion listId(int id);
     public void delete(int id);
     public void update(Notificacion notificacion);
-
-    public List<String[]>NotificacionesNoLeido();
+    public List<String[]> NotificacionesNoLeido();
+    List<String[]> obtenerNotificacionesPorUsuario();
 }

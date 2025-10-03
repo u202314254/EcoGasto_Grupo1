@@ -14,5 +14,12 @@ public interface INotificacionRepository extends JpaRepository<Notificacion,Inte
             "FROM notificacion n\n" +
             "JOIN usuario u ON n.id_usuario = u.id_usuario\n" +
             "WHERE n.leido = FALSE;", nativeQuery = true)
-    public List<String[]>NotificacionesNoLeido();
+    public List<String[]> NotificacionesNoLeido();
+
+    @Query(value = "SELECT u.correo AS usuario, COUNT(n.id_notificacion) AS total_notificaciones " +
+            "FROM usuario u " +
+            "JOIN notificacion n ON u.id_usuario = n.id_usuario " +
+            "GROUP BY u.correo",
+            nativeQuery = true)
+    List<String[]> obtenerNotificacionesPorUsuario();
 }
