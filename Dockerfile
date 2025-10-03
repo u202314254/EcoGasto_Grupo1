@@ -1,5 +1,5 @@
 # Etapa de build con Maven
-FROM maven:3.9.9-eclipse-temurin-21 AS build
+FROM maven:3.9.9-eclipse-temurin-24 AS build
 
 WORKDIR /app
 
@@ -14,7 +14,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Imagen final con solo Java (más liviana)
-FROM eclipse-temurin:21-jdk-alpine
+FROM eclipse-temurin:24-jdk-alpine
 WORKDIR /app
 
 # Copiamos el jar desde la etapa de build
