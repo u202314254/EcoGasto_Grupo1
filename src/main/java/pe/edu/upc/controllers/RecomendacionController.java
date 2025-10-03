@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.dtos.RecomendacionDTO;
 import pe.edu.upc.dtos.RecomendacionPorRecursoDTO;
+import pe.edu.upc.dtos.RecomendacionDTOList;
 import pe.edu.upc.entities.Recomendacion;
 import pe.edu.upc.serviceinterfaces.IRecomendacionService;
 
@@ -20,10 +21,10 @@ public class RecomendacionController {
     @Autowired
     private IRecomendacionService rS;
     @GetMapping
-    public List<RecomendacionDTO> lsitar(){
+    public List<RecomendacionDTOList> lsitar(){
         return rS.list().stream().map(y->{
             ModelMapper m = new ModelMapper();
-            return m.map(y,RecomendacionDTO.class);
+            return m.map(y,RecomendacionDTOList.class);
         }).collect((Collectors.toList()));
     }
     @PostMapping
@@ -83,5 +84,11 @@ public class RecomendacionController {
             listaDTO.add(dto);
         }
         return ResponseEntity.ok(listaDTO);
+    }
+
+    @GetMapping("/buscar")
+    public List<RecomendacionDTOList> buscarPorCategoria(
+            @RequestParam String categoria) {
+        return rS.buscarPorCategoria( categoria);
     }
 }

@@ -2,6 +2,7 @@ package pe.edu.upc.serviceimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.edu.upc.dtos.RecomendacionDTOList;
 import pe.edu.upc.entities.Recomendacion;
 import pe.edu.upc.repositories.IRecomendacionRepository;
 import pe.edu.upc.serviceinterfaces.IRecomendacionService;
@@ -36,5 +37,10 @@ public class RecomendacionImplement implements IRecomendacionService {
     @Override
     public List<String[]> findRecomendacionesPorRecurso() {
         return rS.findRecomendacionesPorRecurso();
+    }
+
+    @Override
+    public List<RecomendacionDTOList> buscarPorCategoria(String categoria) {
+        return rS.buscarPorCategoria(categoria);
     }
 }

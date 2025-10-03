@@ -41,11 +41,4 @@ public class RecursoServiceImplement implements IRecursoService {
     public Recurso listId(Integer id) {
         return rS.findById(id).orElse(null);
     }
-
-    @Override
-    public List<String[]> listarRecursos() {
-        return rS.listarRecursos();
-    }
-
-
 }

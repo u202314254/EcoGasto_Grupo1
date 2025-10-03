@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.dtos.NotificacionDTO;
 import pe.edu.upc.dtos.NotificacionNoLeidaDTO;
+import pe.edu.upc.dtos.NotificacionesxUsuarioDTO;
 import pe.edu.upc.entities.Notificacion;
 import pe.edu.upc.serviceinterfaces.INotificacionService;
 
@@ -78,7 +79,7 @@ public class NotificacionController {
         List<String[]> fila = service.NotificacionesNoLeido();
         if (fila.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se encontraron registros");
+                    .body("No hay notificaciones disponibles");
         }
 
         List<NotificacionNoLeidaDTO> listaDTO = new ArrayList<>();
@@ -87,6 +88,26 @@ public class NotificacionController {
             dto.setTotal(Integer.parseInt(s[0]));
             listaDTO.add(dto);
         }
+        return ResponseEntity.ok(listaDTO);
+    }
+
+    @GetMapping("/reporte-usuarios")
+    public ResponseEntity<?> obtenerNotificacionesPorUsuario() {
+        List<NotificacionesxUsuarioDTO> listaDTO = new ArrayList<>();
+        List<String[]> fila = service.obtenerNotificacionesPorUsuario();
+
+        if (fila.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No hay notificaciones disponibles.");
+        }
+
+        for (String[] g : fila) {
+            NotificacionesxUsuarioDTO dto = new NotificacionesxUsuarioDTO();
+            dto.setUsuario(String.valueOf(g[0]));
+            dto.setTotal(Integer.parseInt(g[1]));
+            listaDTO.add(dto);
+        }
+
         return ResponseEntity.ok(listaDTO);
     }
 }

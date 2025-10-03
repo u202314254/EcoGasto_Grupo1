@@ -5,9 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.dtos.ConsumoDTO;
 import pe.edu.upc.dtos.HogarDTO;
-import pe.edu.upc.entities.Consumo;
 import pe.edu.upc.entities.Hogar;
 import pe.edu.upc.serviceinterfaces.IHogarService;
 
@@ -15,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/{hogares}")
+@RequestMapping("/hogares")
 public class HogarController {
     @Autowired
     private IHogarService hS;

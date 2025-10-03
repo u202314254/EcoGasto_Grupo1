@@ -42,4 +42,15 @@ public class InsigniaServiceImplement implements IInsigniaService {
     public List<String[]> obtenerInsigniasPorUsuario() {
         return iR.obtenerInsigniasPorUsuario();
     }
+
+    @Override
+    public List<String[]> contarInsigniasPorUsuario() {
+        return iR.contarInsigniasPorUsuario();
+    }
+
+    @Override
+    public List<String[]> findInsigniasByMeta() {
+        return iR.findInsigniasByMeta();
+    }
+
 }

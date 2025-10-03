@@ -41,4 +41,9 @@ public class NotificacionServiceImplement implements INotificacionService {
     public List<String[]> NotificacionesNoLeido() {
         return nR.NotificacionesNoLeido();
     }
+
+    @Override
+    public List<String[]> obtenerNotificacionesPorUsuario() {
+        return nR.obtenerNotificacionesPorUsuario();
+    }
 }
