@@ -11,5 +11,4 @@ public interface IRecursoService {
     public void delete(int id);
     public void update(Recurso recurso);
     Recurso listId(Integer id);
-    public List<String[]> listarRecursos();
 }
