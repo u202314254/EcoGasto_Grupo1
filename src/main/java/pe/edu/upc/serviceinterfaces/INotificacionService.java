@@ -11,5 +11,5 @@ public interface INotificacionService {
     public void delete(int id);
     public void update(Notificacion notificacion);
     public List<String[]> NotificacionesNoLeido();
-    List<String[]> obtenerNotificacionesPorUsuario();
+    //List<String[]> obtenerNotificacionesPorUsuario();
 }
