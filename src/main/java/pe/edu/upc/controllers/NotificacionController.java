@@ -91,23 +91,23 @@ public class NotificacionController {
         return ResponseEntity.ok(listaDTO);
     }
 
-    @GetMapping("/reporte-usuarios")
-    public ResponseEntity<?> obtenerNotificacionesPorUsuario() {
-        List<NotificacionesxUsuarioDTO> listaDTO = new ArrayList<>();
-        List<String[]> fila = service.obtenerNotificacionesPorUsuario();
+    //@GetMapping("/reporte-usuarios")
+    //public ResponseEntity<?> obtenerNotificacionesPorUsuario() {
+        //List<NotificacionesxUsuarioDTO> listaDTO = new ArrayList<>();
+        //List<String[]> fila = service.obtenerNotificacionesPorUsuario();
+//
+        //if (fila.isEmpty()) {
+         //   return ResponseEntity.status(HttpStatus.NOT_FOUND)
+            //        .body("No hay notificaciones disponibles.");
+        //}
 
-        if (fila.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No hay notificaciones disponibles.");
-        }
-
-        for (String[] g : fila) {
-            NotificacionesxUsuarioDTO dto = new NotificacionesxUsuarioDTO();
-            dto.setUsuario(String.valueOf(g[0]));
-            dto.setTotal(Integer.parseInt(g[1]));
-            listaDTO.add(dto);
-        }
-
-        return ResponseEntity.ok(listaDTO);
-    }
+        //for (String[] g : fila) {
+       //     NotificacionesxUsuarioDTO dto = new NotificacionesxUsuarioDTO();
+       //     dto.setUsuario(String.valueOf(g[0]));
+       //     dto.setTotal(Integer.parseInt(g[1]));
+      //      listaDTO.add(dto);
+      //  }
+//
+    //    return ResponseEntity.ok(listaDTO);
+   // }
 }
